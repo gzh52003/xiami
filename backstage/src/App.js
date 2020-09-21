@@ -1,8 +1,8 @@
 import React,{Suspense, lazy } from 'react';
 
-import { Menu,Row,Col,Button,Input,Layout, Slider } from 'antd';
+import { Menu,Row,Col,Button,Input,Layout } from 'antd';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer,  Content, Sider} = Layout;
 
 const { Search } = Input;
 import { HomeOutlined, ContactsOutlined, SearchOutlined,TeamOutlined,UserOutlined, AudioOutlined} from '@ant-design/icons';
@@ -94,9 +94,9 @@ render(){
   return (
     <div >
           
-           <Layout>
+           <Layout style={{height: '100%'}}>
            <Header style={{background:"white",lineHeight:"60px",margin:"0,auto"}}>
-             <Row style={{fontSize:"30px",margin:"0,auto",height:"40px",color:"black"}}>
+             <Row style={{fontSize:"30px",margin:"0,auto",color:"black"}}>
                <Col span={18} style={{fontSize:"30px",margin:"0,auto"}}>
              <img src='https://img.alicdn.com/tfs/TB1kdkmh3DqK1RjSZSyXXaxEVXa-216-60.png'  style={{marginRight:"40px",width:"108px",height:"30px"}}/>
              虾米音乐后台管理系统
@@ -108,8 +108,8 @@ render(){
              </Row>
            </Header>
            <Layout>
-             <Slider style={{width:"200px",height:"200px",background:"black",color:"white"}}>
-                <Menu onClick={this.gotoPage} selectedKeys={[current]}  mode="vertical" selectable="false">
+           <Sider style={{width:"200px", background:"black",color:"white",height: '500px'}}>
+                <Menu onClick={this.gotoPage} selectedKeys={[current]}  mode="vertical" selectable="false"  style={{height: '100%',  borderRight: 0 }}>
                   
              {
                     menu.map(item => <Menu.Item key={item.path} >
@@ -118,18 +118,12 @@ render(){
                                 </Menu.Item>)}
                     
                 </Menu>
-                </Slider> 
-                <Content style={{
-            padding: 24,
+                </Sider> 
+                <Content style={{background:"white",height:"100%", padding: 12,
             margin: 0,
-            minHeight: 280,
-            background:"#fff"
-          }}>Content</Content>
-            </Layout>
-           
-          </Layout> 
-          
-          <Suspense>
+            minHeight: 500,}}>
+        
+                <Suspense>
             <Switch>
                         <Route path="/Mine" component={Mine} /> 
                         <Route path="/Home" component={Home} />
@@ -143,6 +137,12 @@ render(){
                         <Redirect from="/" to="/Home" exact />
              </Switch>
           </Suspense>  
+                </Content>
+            </Layout>
+           
+          </Layout> 
+          
+         
                                
                    
 
