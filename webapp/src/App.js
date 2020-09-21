@@ -1,9 +1,11 @@
 import React,{Suspense, lazy } from 'react';
 
-import {Image, Menu,Row,Col,Button,Input } from 'antd';
+import {Image, Menu,Row,Col,Button,Layout} from 'antd';
 
-const { Search } = Input;
-import { HomeOutlined, ContactsOutlined, SearchOutlined,TeamOutlined,UserOutlined, AudioOutlined} from '@ant-design/icons';
+const { Header, Footer,  Content, Sider} = Layout;
+
+// const { Search } = Input;
+import { HomeOutlined, CustomerServiceOutlined , EyeOutlined ,AppstoreOutlined,TeamOutlined,UserOutlined, AudioOutlined} from '@ant-design/icons';
 
 import {HashRouter,BrowserRouter,Route,Redirect,Switch,withRouter,Link,NavLink} from 'react-router-dom'
 
@@ -29,38 +31,38 @@ class App extends React.PureComponent {
     menu: [{
         text: '发现',
         name: 'Home',
-       
+        icon:<EyeOutlined />,
         path: '/Home'
     }, 
     {
         text: '我的音乐',
         name: 'Mymusic',
-    
+        icon:<CustomerServiceOutlined />,
         path: '/Mymusic'
     }, 
-    // {
-    //     text: '媒体播放',
-    //     name: 'Vedio',
-     
-    //     path: '/Vedio'
-    // }, 
     {
-        text: '音乐人',
+        text: '媒体播放',
+        name: 'Vedio',
+     
+        path: '/Vedio'
+    }, 
+    {
+        text: '音乐圈',
         name: 'Musicircle',
       
         path: '/Musicircle'
     },
-    {
-      text: '客户端下载',
-      name: 'Client',
+  //   {
+  //     text: '客户端下载',
+  //     name: 'Client',
       
-      path: '/Client'
-  }
-   ,
+  //     path: '/Client'
+  // }
+  //  ,
     {
-      text: '会员中心',
+      text: '个人中心',
       name: 'Mine',
-      
+      icon:<AppstoreOutlined />,
       path: '/Mine'
   },
 //   {
@@ -97,40 +99,11 @@ render(){
     // console.log('App.props=',this.props)
   return (
     <div >
-          <Row style={{ lineHeight:"70px" ,margin:"0,auto",color:"#fff"}}>
-            <Col span={18} style={{lineHeight:"70px",}}>
-              
-                <Menu  style={{border:"none",margin:"0,auto",lineHeight:"70px",fontSize: 16,paddingLeft:"30px"}} onClick={this.gotoPage} selectedKeys={[current]} mode="horizontal" selectable="false">
-                  <img src='https://img.alicdn.com/tfs/TB1kdkmh3DqK1RjSZSyXXaxEVXa-216-60.png'  style={{marginRight:"40px",width:"108px",height:"30px"}}/>
-                  
-             {
-                    menu.map(item => <Menu.Item key={item.path} >
-                                          
-                                            {item.text}
-                                </Menu.Item>)}
-                    
-                </Menu>
-          </Col>
-          <Col span={6} style={{lineHeight:"70px",}}> 
-          
-            <Input  style={{
-              // position:"absolute",
-              margin:"0,auto",
-                  // marginTop:"16px",
-                   borderBottom:"1px solid #4a4a4a",
-                    fontSize: 16,
-                    // color: '#000',
-                    width:'105px',
-                    // bordered:"false"
-                  
-                  }}  placeholder="搜索" size="large" />
-           <SearchOutlined style={{fontSize: '32px',padding:'10px',margin:'0,auto', color: '#666' }} />
-            <a onClick={this.goto.bind(this,'/login')} style={{color:"black",fontSize:"16px"}}>登录/注册</a>
-          
-          </Col>
-          </Row>
-          
-          <Suspense>
+      <Layout>
+      {/* <Header>Header</Header> */}
+      
+      <Content style={{height:"100%"}}>
+         <Suspense>
             <Switch>
                         <Route path="/Mine" component={Mine} /> 
                         <Route path="/Home" component={Home} />
@@ -144,7 +117,52 @@ render(){
                         <Route path="/notfound" render={() => <div>404</div>} />
                         <Redirect from="/" to="/Home" exact />
              </Switch>
-          </Suspense>  
+          </Suspense> 
+        </Content>
+        
+      
+       
+        <Footer style={{minWidth:"200px",padding:"0"}} >
+       
+       
+          
+              
+                <p  style={{width:"100%",height:"40px",position:"relative",top:"0" ,backgroundColor:"ccc"}} onClick={this.gotoPage} selectedKeys={[current]} mode="horizontal" >
+                  {/* <img src='https://img.alicdn.com/tfs/TB1kdkmh3DqK1RjSZSyXXaxEVXa-216-60.png'  style={{marginRight:"40px",width:"108px",height:"30px"}}/> */}
+                  
+             {
+                    menu.map(item => <div onClick={this.goto.bind(this,item.path)} key={item.path} style={{paddingRight:"16px",color:"black",fontSize:"16px",display:"inline-block"}} >
+                                             <p style={{margin:"0,auto",paddingRight:"16px",position:"absolute",bottom:"18px",display:"inline"}}>{item.icon}</p>
+                                              <p style={{paddingLeft:"10px",fontSize:"14px",display:"inline"}}>{item.text}</p>
+                                </div>
+                                 )}
+                    
+                </p>
+          
+      
+          
+            {/* <input  type='text' style={{
+              // position:"absolute",
+              margin:"0,auto",
+                  // marginTop:"16px",
+                   borderBottom:"1px solid #4a4a4a",
+                    fontSize: 16,
+                    // color: '#000',
+                    width:'105px',
+                    height:"30px",
+                    
+                    borderBottomColor:"black"
+                   
+                  
+                  }}    /> */}
+           {/* <SearchOutlined style={{fontSize: '32px',padding:'10px',margin:'0,auto', color: '#666' }} />
+            <a onClick={this.goto.bind(this,'/login')} style={{color:"black",fontSize:"16px"}}>登录/注册</a> */}
+          
+         
+        </Footer>
+        
+      </Layout>
+         
                                
                    
 
