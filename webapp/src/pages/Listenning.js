@@ -4,8 +4,7 @@ class Client extends React.PureComponent{
     render(){
         return(
             <div>
-
-                客户端下载
+                正在播放
             </div>
         )
     }

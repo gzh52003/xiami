@@ -1,15 +1,15 @@
 import React from 'react';
 
-class Musiccircle extends React.PureComponent{
+class MusicCircle extends React.PureComponent {
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
 
-            音乐人
+                音乐人
             </div>
         )
     }
 }
 
-export default Musiccircle
+export default MusicCircle
