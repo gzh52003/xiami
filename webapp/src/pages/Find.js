@@ -12,7 +12,7 @@ class Find extends React.PureComponent {
         return (
             <div style={{ height: "100%" }}>
                 <Tabs tabs={tabs}
-                    initialPage={1}
+                    initialPage={0}
                 >
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', backgroundColor: '#fff' }}>
                         <MusicLibrary />

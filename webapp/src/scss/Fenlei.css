@@ -1,0 +1,28 @@
+h2{
+    width: 100px;
+    height: 40px;
+    font-weight: 300;
+    line-height: 40px;
+    margin-left: 20px;
+}
+.fenlei{
+    width:80%;
+    margin:0 auto;
+}
+i{
+    width:20%;
+    height:30px;
+    line-height:30px;
+    text-align:center; 
+    font-size:14px;
+    display:inline-block; 
+    background:#f3f3f3;
+    color:#000;
+    margin-right:20px;
+    margin-bottom: 10px;
+    border-radius: 25px;
+    font-style: normal;
+}
+i:nth-of-type(4n){
+    margin-right:0
+}
