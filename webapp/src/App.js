@@ -1,149 +1,105 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
+
 import Mine from './pages/Mine'
 import MusicCircle from './pages/MusicCircle'
 import Mymusic from './pages/Mymusic'
 import Listenning from './pages/Listenning'
 import Find from './pages/Find'
+import Qufeng from './pages/more/Qufeng'
+import Fenlei from './pages/more/Fenlei'
+import Qikan from './pages/more/Qikan'
+import Xinge from './pages/more/Xinge'
+
 import { TabBar } from 'antd-mobile';
+import { Route, Switch, withRouter } from 'react-router-dom'
+import { HomeOutlined, ContactsOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedTab: 'blueTab',
-      hidden: false,
-      fullScreen: false,
-    };
+  state = {
+    menu: [
+      {
+        text: '发现',
+        name: 'Find',
+        icon: <HomeOutlined />,
+        path: '/find'
+      },
+      {
+        text: '我的音乐',
+        name: 'Mymusic',
+        icon: <ContactsOutlined />,
+        path: '/mymusic'
+      }, {
+        text: '正在播放',
+        name: 'Listenning',
+        icon: <TeamOutlined />,
+        path: '/listenning'
+      },
+      {
+        text: '音乐圈',
+        name: 'MusicCircle',
+        icon: <UserOutlined />,
+        path: '/musicCircle'
+      },
+      {
+        text: '个人中心',
+        name: 'Mine',
+        icon: <UserOutlined />,
+        path: '/mine'
+      }
+    ],
+    selectedTab: '/find',
   }
-
-  renderContent(pageText) {
-    return (
-      <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
-       {pageText}
-      </div>
-    );
+  gotoPage = (key) => {
+    this.setState({
+      selectedTab: key
+    })
+    this.goto(key);
+  }
+  goto = (path) => {
+    this.props.history.push(path);
   }
 
   render() {
+    const { menu, selectedTab } = this.state;
     return (
-      <div style={{ position: 'fixed', height: '100%', width: '100%', bottom: 0 }}>
-        <TabBar
-          unselectedTintColor="#949494"
-          tintColor="#33A3F4"
-          barTintColor="white"
-          hidden={this.state.hidden}
-        >
-          <TabBar.Item
-            title="发现"
-            key="发现"
-            icon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
-            />
-            }
-            selectedIcon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
-            />
-            }
-            selected={this.state.selectedTab === 'blueTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'blueTab',
-              });
-            }}
-            data-seed="logId"
+      <div style={{ height: '100%', width: '100%' }}>
+        <Suspense >
+          <Switch>
+            <Route path="/find" component={Find} />
+            <Route path="/listenning" component={Listenning} />
+            <Route path="/mine" component={Mine} />
+            <Route path="/musicCircle" component={MusicCircle} />
+            <Route path="/mymusic" component={Mymusic} />
+            <Route path="/qufeng" component={Qufeng} />
+            <Route path="/xinge" component={Xinge} />
+            <Route path="/qikan" component={Qikan} />
+            <Route path="/fenlei" component={Fenlei} />
+          </Switch>
+        </Suspense>
+        
+        <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0, zIndex:'-1'}}>
+          <TabBar
+            unselectedTintColor="#949494"
+            tintColor="#33A3F4"
+            barTintColor="white"
           >
-            {this.renderContent(<Find/>)}
-          </TabBar.Item>
-          <TabBar.Item
-            icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat' }}
-              />
+            {
+              menu.map(item =>
+                <TabBar.Item
+                  title={item.text}
+                  key={item.path}
+                  icon={item.icon}
+                  onPress={this.gotoPage.bind(this, item.path)} selectedKeys={[selectedTab]}
+              ></TabBar.Item>
+              )
             }
-            selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat' }}
-              />
-            }
-            title="我的音乐"
-            key="我的音乐"
-            selected={this.state.selectedTab === 'redTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'redTab',
-              });
-            }}
-            data-seed="logId1"
-          >
-            {this.renderContent(<Mymusic/>)}
-          </TabBar.Item>
-          <TabBar.Item
-            icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-            selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
-            title="正在播放"
-            key="正在播放"
-            selected={this.state.selectedTab === 'pinkTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'pinkTab',
-              });
-            }}
-          >
-            {this.renderContent(<Listenning/>)}
-          </TabBar.Item>
-          <TabBar.Item
-            icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat' }}
-              />
-            }
-            selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat' }}
-              />
-            }
-            title="音乐圈"
-            key="音乐圈"
-            selected={this.state.selectedTab === 'greenTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'greenTab',
-              });
-            }}
-          >
-            {this.renderContent(<MusicCircle/>)}
-          </TabBar.Item>
-          <TabBar.Item
-            icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-            selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
-            title="个人中心"
-            key="个人中心"
-            selected={this.state.selectedTab === 'yellowTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'yellowTab',
-              });
-            }}
-          >
-            {this.renderContent(<Mine/>)}
-          </TabBar.Item>
-        </TabBar>
+          </TabBar>
+        </div>
       </div>
+
     );
   }
 }
-
+App = withRouter(App);
 export default App;
 
