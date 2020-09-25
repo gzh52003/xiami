@@ -13,7 +13,7 @@ import Details from './pages/more/Details'
 import Login from './pages/Login'
 
 import { TabBar } from 'antd-mobile';
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter,Redirect } from 'react-router-dom'
 import { SearchOutlined, CustomerServiceOutlined,PlayCircleOutlined, UsergroupAddOutlined, AppstoreOutlined } from '@ant-design/icons';
 
 class App extends React.Component {
@@ -60,6 +60,13 @@ class App extends React.Component {
   goto = (path) => {
     this.props.history.push(path);
   }
+  componentWillMount() {
+    const { pathname } = this.props.location;
+    console.log(pathname);
+    this.setState({
+      selectedTab: pathname
+    })
+  }
 
   render() {
     const { menu, selectedTab } = this.state;
@@ -78,6 +85,7 @@ class App extends React.Component {
             <Route path="/fenlei" component={Fenlei} />
             <Route path="/details" component={Details} />
             <Route path="/login" component={Login} />
+            <Redirect from="/" to="/find" exact />
           </Switch>
         </Suspense>
         

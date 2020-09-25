@@ -1,9 +1,9 @@
-import React, { Suspense } from 'react';
-import { Flex, WhiteSpace, Icon, Carousel, WingBlank } from 'antd-mobile';
+import React from 'react';
+import { Flex, WhiteSpace, Icon} from 'antd-mobile';
 import { Image } from 'antd';
 import request from '../utils/request';
 import { withRouter } from 'react-router-dom';
-
+import { PlayCircleOutlined } from '@ant-design/icons';
 class MusicLibrary extends React.PureComponent {
     state = {
         data1: [],
@@ -111,15 +111,21 @@ class MusicLibrary extends React.PureComponent {
                     </div>
                     {
                         data1.map(item =>
-                            <div
+                            <div 
+                                onClick={this.goto.bind(this, `/details?${item.tag}`)}
                                 key={item.id}
                                 style={{ float: "left", width: "33.3%", textAlign: "center" }}>
-                                <Image
-                                    src={item.coverImgUrl}
-                                    width={100}
-                                    height={80}
-                                >
-                                </Image>
+                                <div style={{position:"relative"}}>    
+                                    <Image
+                                        src={item.coverImgUrl}
+                                        width={100}
+                                        height={80}
+                                    >
+                                    </Image>
+                                    <div style={{ position:"absolute", top:"30px", left:"0", right:"0", bottom:"0"}}>
+                                            <PlayCircleOutlined style={{fontSize:"20px",color:"#fff"}} />
+                                    </div>
+                                </div>                                
                                 <p>{item.tag}</p>
                             </div>
                         )
@@ -135,14 +141,20 @@ class MusicLibrary extends React.PureComponent {
                     {
                         data2.map(item =>
                             <div
+                                onClick={this.goto.bind(this, '/details')}
                                 key={item.id}
                                 style={{ float: "left", width: "33.3%", textAlign: "center", position:"relative", marginBottom:"20px" }}>
-                                <Image
-                                    src={item.coverImgUrl}
-                                    width={100}
-                                    height={80}
-                                >
-                                </Image>
+                                <div style={{position:"relative"}}>    
+                                    <Image
+                                        src={item.coverImgUrl}
+                                        width={100}
+                                        height={80}
+                                    >
+                                    </Image>
+                                    <div style={{ position:"absolute", top:"30px", left:"0", right:"0", bottom:"0"}}>
+                                            <PlayCircleOutlined style={{fontSize:"20px",color:"#fff"}} />
+                                    </div>
+                                </div>
                                 <p style={{width:"40px",height:"20px",background:"#000",color:"#fff", position:"absolute",bottom:"-14px", left:"10px"}}>{item.tags[0]}</p>
                             </div>
                         )
@@ -159,6 +171,7 @@ class MusicLibrary extends React.PureComponent {
                         {
                             data3.map(item =>
                                 <div
+                                    onClick={this.goto.bind(this, '/details')}
                                     key={item.id}
                                     style={{ height: "90px", width: "90%", marginBottom: "20px",marginLeft:"10px" }}>
                                     <div style={{ float: "left", height: "80px", width: "100px" }}>
@@ -181,6 +194,7 @@ class MusicLibrary extends React.PureComponent {
                         {
                             data4.map(item =>
                                 <div
+                                    onClick={this.goto.bind(this, '/details')}
                                     key={item.id}
                                     style={{ float: "left", textAlign: "center" }}>
                                     <Image
@@ -233,12 +247,17 @@ class MusicLibrary extends React.PureComponent {
                                 style={{ float: "left", width: "100px", marginRight: "10px", textAlign: "center", overflow: "hidden" }}
                             >
                                 <div style={{ width: "80px", height: "80px", borderRadius: "50% 50%", overflow: "hidden" }}>
+                                <div style={{position:"relative"}}>    
                                     <Image
                                         src={item.picUrl}
                                         width={80}
                                         height={80}
                                     >
                                     </Image>
+                                    <div style={{ position:"absolute", top:"30px", left:"0", right:"0", bottom:"0"}}>
+                                            <PlayCircleOutlined style={{fontSize:"20px",color:"#fff"}} />
+                                    </div>
+                                </div>
                                 </div>
                                 <p style={{ fontSize: "14px", lineHeight: "16px", width: "100px", textAlign: "center" }}>{item.name}</p>
                             </div>
