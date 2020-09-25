@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, NavBar, Icon } from 'antd-mobile';
+import { Menu, NavBar } from 'antd-mobile';
 import { withRouter } from 'react-router-dom'
 import { ArrowLeftOutlined } from '@ant-design/icons';
 
@@ -388,7 +388,7 @@ class Qufeng extends React.PureComponent {
             ]
     }
     onChange(value) {
-        this.props.history.push('/details?a=' + value[0] + 'b=' + value[1])
+        this.props.history.push('/details')
     }
     render() {
         const { menu } = this.state

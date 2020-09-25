@@ -1,50 +1,46 @@
-import React, { Suspense } from 'react';
-import { Flex, WhiteSpace, Icon, Carousel, WingBlank } from 'antd-mobile';
+import React from 'react';
+import { Flex, WhiteSpace, Icon} from 'antd-mobile';
 import { Image } from 'antd';
 import request from '../utils/request';
 import { withRouter } from 'react-router-dom';
-
+import { PlayCircleOutlined } from '@ant-design/icons';
 class MusicLibrary extends React.PureComponent {
     state = {
         data1: [],
         data2: [],
         data3: [],
         data4: [],
-        data5: [],
-        data6: []
+        data5: []
     }
     goto = (path) => {
         this.props.history.push(path);
     }
 
     async componentDidMount() {
-        const res1 = await request.get('/top/playlist/highquality?limit=6');
+        const res1 = await request.get('/music?page=1&size=6');
         this.setState({
-            data1: res1.playlists
+            data1: res1
         });
-        const res2 = await request.get('/top/playlist?limit=6');
+        console.log(res1);
+        const res2 = await request.get('/music?page=2&size=6');
         this.setState({
-            data2: res2.playlists
+            data2: res2
         });
-        const res3 = await request.get('/top/album?offset=2&limit=3');
+        const res3 = await request.get('/music?page=5&size=3');
         this.setState({
-            data3: res3.albums
+            data3: res3
         });
-        const res4 = await request.get('/top/album?offset=9&limit=3');
+        const res4 = await request.get('/music?page=6&size=3');
         this.setState({
-            data4: res4.albums
+            data4: res4
         });
-        const res5 = await request.get('/personalized/privatecontent/list');
+        const res5 = await request.get('/music?page=7&size=3');
         this.setState({
-            data5: res5.result
-        });
-        const res6 = await request.get('/artist/list?type=1&area=7&initial=b&limit=6');
-        this.setState({
-            data6: res6.artists
+            data5: res5
         });
     }
     render() {
-        const { data1, data2, data3, data4, data5, data6 } = this.state;
+        const { data1, data2, data3, data4, data5 } = this.state;
         return (
             <div style={{ height: "100%", padding: "0 10px" }}>
                 <div style={{ width: "90%", height: "100px", margin: "20px auto" }} >
@@ -111,16 +107,22 @@ class MusicLibrary extends React.PureComponent {
                     </div>
                     {
                         data1.map(item =>
-                            <div
+                            <div 
+                                onClick={this.goto.bind(this, `/details?${item.tag}`)}
                                 key={item.id}
                                 style={{ float: "left", width: "33.3%", textAlign: "center" }}>
-                                <Image
-                                    src={item.coverImgUrl}
-                                    width={100}
-                                    height={80}
-                                >
-                                </Image>
-                                <p>{item.tag}</p>
+                                <div style={{position:"relative"}}>    
+                                    <Image
+                                        src={item.album.blurPicUrl}
+                                        width={100}
+                                        height={80}
+                                    >
+                                    </Image>
+                                    <div style={{ position:"absolute", top:"30px", left:"0", right:"0", bottom:"0"}}>
+                                            <PlayCircleOutlined style={{fontSize:"20px",color:"#fff"}} />
+                                    </div>
+                                </div>                                
+                                <p>{item.name}</p>
                             </div>
                         )
                     }
@@ -135,15 +137,21 @@ class MusicLibrary extends React.PureComponent {
                     {
                         data2.map(item =>
                             <div
+                                onClick={this.goto.bind(this, '/details')}
                                 key={item.id}
                                 style={{ float: "left", width: "33.3%", textAlign: "center", position:"relative", marginBottom:"20px" }}>
-                                <Image
-                                    src={item.coverImgUrl}
-                                    width={100}
-                                    height={80}
-                                >
-                                </Image>
-                                <p style={{width:"40px",height:"20px",background:"#000",color:"#fff", position:"absolute",bottom:"-14px", left:"10px"}}>{item.tags[0]}</p>
+                                <div style={{position:"relative"}}>    
+                                    <Image
+                                        src={item.album.blurPicUrl}
+                                        width={100}
+                                        height={80}
+                                    >
+                                    </Image>
+                                    <div style={{ position:"absolute", top:"30px", left:"-15px", right:"0", bottom:"0"}}>
+                                            <PlayCircleOutlined style={{fontSize:"20px",color:"#fff"}} />
+                                    </div>
+                                </div>
+                                <p style={{width:"80px",height:"20px",lineHeight:"20px", background:"#000",color:"#fff",overflow:"hidden", position:"absolute",bottom:"-14px", left:"10px"}}>{item.name}</p>
                             </div>
                         )
                     }
@@ -159,11 +167,12 @@ class MusicLibrary extends React.PureComponent {
                         {
                             data3.map(item =>
                                 <div
+                                    onClick={this.goto.bind(this, '/details')}
                                     key={item.id}
                                     style={{ height: "90px", width: "90%", marginBottom: "20px",marginLeft:"10px" }}>
                                     <div style={{ float: "left", height: "80px", width: "100px" }}>
                                         <Image
-                                            src={item.picUrl}
+                                            src={item.album.blurPicUrl}
                                             width={100}
                                             height={80}
                                         >
@@ -171,7 +180,7 @@ class MusicLibrary extends React.PureComponent {
                                     </div>
                                     <div style={{ float: "left", width: "180px" }}>
                                         <p>{item.name}</p>
-                                        <p>{item.company}</p>
+                                        <p>{item.artists[0].name}</p>
                                     </div>
                                 </div>
                             )
@@ -181,10 +190,11 @@ class MusicLibrary extends React.PureComponent {
                         {
                             data4.map(item =>
                                 <div
+                                    onClick={this.goto.bind(this, '/details')}
                                     key={item.id}
                                     style={{ float: "left", textAlign: "center" }}>
                                     <Image
-                                        src={item.picUrl}
+                                        src={item.album.blurPicUrl}
                                         width={110}
                                         height={80}
                                     >
@@ -209,38 +219,12 @@ class MusicLibrary extends React.PureComponent {
                                 style={{ float: "left", width: "100px", marginRight: "10px", textAlign: "center", overflow: "hidden" }}
                             >
                                 <Image
-                                    src={item.picUrl}
+                                    src={item.album.blurPicUrl}
                                     width={100}
                                     height={80}
                                 >
                                 </Image>
                                 <p style={{ fontSize: "14px", lineHeight: "16px", width: "100px", textAlign: "center", overflow:"hidden",textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{item.name}</p>
-                            </div>
-                        )
-                    }
-                </div>
-                
-                <div style={{ width: "90%", textAlign: "left", margin: "0 auto" }}>
-                    <div>
-                        <h2 style={{ float: "left", width: "80%", fontWeight: "400", marginLeft:"4px" }}>艺人 50万+</h2>
-                        <h4 style={{ float: "left", fontWeight: "300", marginTop: "28px" }} >更多</h4>
-                        <Icon type="right" style={{ marginTop: "26px" }}></Icon>
-                    </div>
-                    {
-                        data6.map(item =>
-                            <div
-                                key={item.id}
-                                style={{ float: "left", width: "100px", marginRight: "10px", textAlign: "center", overflow: "hidden" }}
-                            >
-                                <div style={{ width: "80px", height: "80px", borderRadius: "50% 50%", overflow: "hidden" }}>
-                                    <Image
-                                        src={item.picUrl}
-                                        width={80}
-                                        height={80}
-                                    >
-                                    </Image>
-                                </div>
-                                <p style={{ fontSize: "14px", lineHeight: "16px", width: "100px", textAlign: "center" }}>{item.name}</p>
                             </div>
                         )
                     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavBar, Tabs, WhiteSpace, Badge } from 'antd-mobile';
-import { ArrowLeftOutlined, PlayCircleTwoTone, PlayCircleOutlined, EllipsisOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, PlayCircleOutlined, EllipsisOutlined } from '@ant-design/icons';
 import '../../scss/Xinge.css';
 import request from '../../utils/request'
 import { Image } from 'antd';
@@ -15,14 +15,13 @@ class Xinge extends React.PureComponent {
         data: []
     }
     async componentDidMount() {
-        const res = await request.get('/top/song?type=7');
+        const res = await request.get('/music');
         this.setState({
-            data: res.data
+            data: res
         });
     }
     render() {
         const { data } = this.state;
-        console.log(data);
         return (
             <div style={{ background: "#fff" }}>
                 <div className='menu-active'>
