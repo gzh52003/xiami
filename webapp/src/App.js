@@ -9,6 +9,8 @@ import Qufeng from './pages/more/Qufeng'
 import Fenlei from './pages/more/Fenlei'
 import Qikan from './pages/more/Qikan'
 import Xinge from './pages/more/Xinge'
+import Login from './pages/Login'
+import Reg from './pages/Reg'
 
 import { TabBar } from 'antd-mobile';
 import { Route, Switch, withRouter } from 'react-router-dom'
@@ -74,6 +76,8 @@ class App extends React.Component {
             <Route path="/xinge" component={Xinge} />
             <Route path="/qikan" component={Qikan} />
             <Route path="/fenlei" component={Fenlei} />
+            <Route path="/login" component={Login} />
+            <Route path="/reg" component={Reg}/>
           </Switch>
         </Suspense>
         

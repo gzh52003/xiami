@@ -12,7 +12,9 @@ module.exports = {
                 use:[{
                     loader:'babel-loader',
                     options:{
-                        presets:['@babel/preset-react'],
+                        "babelrc": false,
+                        presets:[['@babel/preset-react'], ["react"],
+                        ["es2015", { "modules": false }]],
                         // 插件
                         plugins:[
                             ['@babel/plugin-proposal-decorators',{legacy: true}],
@@ -22,6 +24,9 @@ module.exports = {
                                 "libraryDirectory": "es",
                                 "style": "css" // `style: true` 会加载 less 文件
                             }],
+                            "syntax-dynamic-import",
+                            "transform-object-rest-spread",
+                            "transform-class-properties"
                         ]
                     }
                 }]

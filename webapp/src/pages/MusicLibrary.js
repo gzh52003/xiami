@@ -14,7 +14,7 @@ class MusicLibrary extends React.PureComponent {
         data6: [],
     }    
     goto = (path) => {
-console.log(1111);
+// console.log(1111);
         this.props.history.push(path);
     }
 
