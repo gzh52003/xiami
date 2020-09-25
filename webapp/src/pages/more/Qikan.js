@@ -1,15 +1,14 @@
 import React from 'react';
 
-class MusicCircle extends React.PureComponent {
+class Qikan extends React.PureComponent {
 
     render() {
         return (
             <div>
-
-                音乐人
+                专题期刊
             </div>
         )
     }
 }
 
-export default MusicCircle
+export default Qikan

@@ -1,13 +1,13 @@
-import React,{Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 
-import { Menu,Row,Col,Button,Input,Layout } from 'antd';
+import { Menu, Row, Col, Button, Input, Layout, Sider } from 'antd';
 
 const { Header, Footer,  Content, Sider} = Layout;
 
 const { Search } = Input;
-import { HomeOutlined, ContactsOutlined, SearchOutlined,TeamOutlined,UserOutlined, AudioOutlined} from '@ant-design/icons';
+import { HomeOutlined, ContactsOutlined, SearchOutlined, TeamOutlined, UserOutlined, AudioOutlined } from '@ant-design/icons';
 
-import {HashRouter,BrowserRouter,Route,Redirect,Switch,withRouter,Link,NavLink} from 'react-router-dom'
+import { HashRouter, BrowserRouter, Route, Redirect, Switch, withRouter, Link, NavLink } from 'react-router-dom'
 
 // const Mine = lazy(() => import("./pages/Mine"));//个人中心
 // const Home = lazy(() => import("./pages/Home"));//发现
@@ -28,128 +28,130 @@ class App extends React.PureComponent {
   state = {
     // currentUser:{},
     menu: [{
-        text: '首页',
-        name: 'Home',
-       
-        path: '/Home'
-    }, 
+      text: '首页',
+      name: 'Home',
+
+      path: '/Home'
+    },
     {
-        text: '用户管理',
-        name: 'User',
-    
-        path: '/User'
-    }, 
-   
+      text: '用户管理',
+      name: 'User',
+
+      path: '/User'
+    },
+
     {
-        text: '歌曲管理',
-        name: 'Musicircle',
-      
-        path: '/Musicircle'
+      text: '歌曲管理',
+      name: 'Musicircle',
+
+      path: '/Musicircle'
     },
     {
       text: '订单管理',
       name: 'Order',
-      
+
       path: '/Order'
-  }
-   ,
+    }
+      ,
     {
       text: '个人中心',
       name: 'Mine',
-      
+
       path: '/Mine'
-  },
-//   {
-//     text: '登录/注册',
-//     name: 'Login',
-    
-//     path: '/Login'
-// },
-],
+    },
+      //   {
+      //     text: '登录/注册',
+      //     name: 'Login',
+
+      //     path: '/Login'
+      // },
+    ],
     current: '/Home'
-}
-gotoPage = ({ key }) => {
-  this.setState({
-      current:key
-  })
-  this.goto(key);
-  // this.props.history.replace(path);
-}
-goto = (path)=>{
-  this.props.history.push(path);
-}
-componentWillMount(){
-  const {pathname} = this.props.location;
-  console.log('props=',this.props)
+  }
+  gotoPage = ({ key }) => {
+    this.setState({
+      current: key
+    })
+    this.goto(key);
+    // this.props.history.replace(path);
+  }
+  goto = (path) => {
+    this.props.history.push(path);
+  }
+  componentWillMount() {
+    const { pathname } = this.props.location;
+    console.log('props=', this.props)
 
-  this.setState({
-      current:pathname
-  })
-}
+    this.setState({
+      current: pathname
+    })
+  }
 
 
-render(){
-    const {menu,current} = this.state
+  render() {
+    const { menu, current } = this.state
     // console.log('App.props=',this.props)
-  return (
-    <div >
-          
-           <Layout style={{height: '100%'}}>
-           <Header style={{background:"white",lineHeight:"60px",margin:"0,auto"}}>
-             <Row style={{fontSize:"30px",margin:"0,auto",color:"black"}}>
-               <Col span={18} style={{fontSize:"30px",margin:"0,auto"}}>
-             <img src='https://img.alicdn.com/tfs/TB1kdkmh3DqK1RjSZSyXXaxEVXa-216-60.png'  style={{marginRight:"40px",width:"108px",height:"30px"}}/>
+    return (
+      <div >
+
+        <Layout>
+          <Header style={{ background: "white", lineHeight: "60px", margin: "0,auto" }}>
+            <Row style={{ fontSize: "30px", margin: "0,auto", height: "40px", color: "black" }}>
+              <Col span={18} style={{ fontSize: "30px", margin: "0,auto" }}>
+                <img src='https://img.alicdn.com/tfs/TB1kdkmh3DqK1RjSZSyXXaxEVXa-216-60.png' style={{ marginRight: "40px", width: "108px", height: "30px" }} />
              虾米音乐后台管理系统
              </Col>
-             <Col span={6} style={{textAlign:"right"}}>
-             <a onClick={this.goto.bind(this,'/Login')} style={{color:"black",fontSize:"20px",marginRight:"10px"}}>登录</a>
-             <a onClick={this.goto.bind(this,'/Reg')} style={{color:"black",fontSize:"20px" }}>注册</a>
-             </Col>
-             </Row>
-           </Header>
-           <Layout>
-           <Sider style={{width:"200px", background:"black",color:"white",height: '500px'}}>
-                <Menu onClick={this.gotoPage} selectedKeys={[current]}  mode="vertical" selectable="false"  style={{height: '100%',  borderRight: 0 }}>
-                  
-             {
-                    menu.map(item => <Menu.Item key={item.path} >
-                                          
-                                            {item.text}
-                                </Menu.Item>)}
-                    
-                </Menu>
-                </Sider> 
-                <Content style={{background:"white",height:"100%", padding: 12,
-            margin: 0,
-            minHeight: 500,}}>
-        
-                <Suspense>
-            <Switch>
-                        <Route path="/Mine" component={Mine} /> 
-                        <Route path="/Home" component={Home} />
-                        <Route path="/Musicircle" component={Musiccircle} />
-                        <Route path="/Order" component={Order} />
-                        <Route path="/User" component={User} />
-                        <Route path="/Login" component={Login} />
-                        <Route path="/Reg" component={Reg} />
-                        
-                        <Route path="/notfound" render={() => <div>404</div>} />
-                        <Redirect from="/" to="/Home" exact />
-             </Switch>
-          </Suspense>  
-                </Content>
-            </Layout>
-           
-          </Layout> 
-          
-         
-                               
-                   
+              <Col span={6} style={{ textAlign: "right" }}>
+                <a onClick={this.goto.bind(this, '/Login')} style={{ color: "black", fontSize: "20px", marginRight: "10px" }}>登录</a>
+                <a onClick={this.goto.bind(this, '/Reg')} style={{ color: "black", fontSize: "20px" }}>注册</a>
+              </Col>
+            </Row>
+          </Header>
+          <Layout>
+            <Sider style={{ width: "200px", height: "100%", background: "black", color: "white" }}>
+              <Menu onClick={this.gotoPage} selectedKeys={[current]} mode="vertical" selectable="false">
 
-         
-    </div>
-  );
-}
+                {
+                  menu.map(item => <Menu.Item key={item.path} >
+
+                    {item.text}
+                  </Menu.Item>)}
+
+              </Menu>
+            </Sider>
+            <Content style={{
+              padding: 24,
+              margin: 0,
+              minHeight: 280,
+              background: "#fff"
+            }}>
+              <Suspense>
+                <Switch>
+                  <Route path="/Mine" component={Mine} />
+                  <Route path="/Home" component={Home} />
+                  <Route path="/Musicircle" component={Musiccircle} />
+                  <Route path="/Order" component={Order} />
+                  <Route path="/User" component={User} />
+                  <Route path="/Login" component={Login} />
+                  <Route path="/Reg" component={Reg} />
+
+                  <Route path="/notfound" render={() => <div>404</div>} />
+                  <Redirect from="/" to="/Home" exact />
+                </Switch>
+              </Suspense>  
+            </Content>
+          </Layout>
+
+        </Layout>
+
+
+
+
+
+
+      </div>
+    );
+  }
 }
 
 App = withRouter(App);
