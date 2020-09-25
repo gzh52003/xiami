@@ -8,3 +8,52 @@
 #tab-bar .demo-preview-item .am-tab-bar {
   background-color: white;
 }
+
+div.am-list-body::before{
+  background-color: white!important;
+}
+div.am-list-body::after{
+  background-color: white!important;
+}
+.am-list-body {
+border-top: none;
+border-bottom: none;
+}
+div.am-list-line::after{
+  background-color: white!important;
+}
+
+.am-list-line {
+border-top: none;
+border-bottom: none
+}
+.am-list-item .am-list-line .am-list-content{
+  font-size:14px;
+}
+.am-list-item .am-list-line .am-list-extra{
+  font-size:13px;
+  /* color:red; */
+}
+#icon{
+  color:red;
+  margin-right:15px;
+}
+#icon_1{
+  color:lightgreen;
+  margin-right:15px;
+}
+input{
+  width:260px;
+  height:30px;
+  border:none;
+}
+#basic_mdl{
+  width:50px;
+  height:10px;
+}
+.ant-btn{
+  width:260px;
+  height:35px;
+  border:none;
+  color:white;
+}
