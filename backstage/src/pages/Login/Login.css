@@ -1,0 +1,33 @@
+.header {
+  height: 100vh;
+  width: 100vw;
+
+  background-image: url("https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3979962137,1897993216&fm=26&gp=0.jpg");
+  background: cadetblue;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  top:"40%";
+  align-items: center;
+
+}
+
+/* .LoginApp {
+  background-color: rgba(240, 242, 245, 0.3);
+} */
+
+/* .LoginApp .ant-layout {
+  margin-top: 30px;
+  margin-left: 20px;
+  width: 500px;
+  background-color: rgba(240, 242, 245, 0);
+} */
+
+/* .sea {
+  margin-left: 165px;
+  font-size: 10px;
+} */
+
+/* .ant-form-item-control {
+  width: 150px;
+} */
