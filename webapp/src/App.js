@@ -11,10 +11,12 @@ import Qikan from './pages/more/Qikan'
 import Xinge from './pages/more/Xinge'
 import Login from './pages/Login'
 import Reg from './pages/Reg'
+import Details from './pages/more/Details'
+
 
 import { TabBar } from 'antd-mobile';
 import { Route, Switch, withRouter } from 'react-router-dom'
-import { HomeOutlined, ContactsOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { SearchOutlined, CustomerServiceOutlined,PlayCircleOutlined, UsergroupAddOutlined, AppstoreOutlined } from '@ant-design/icons';
 
 class App extends React.Component {
   state = {
@@ -22,30 +24,30 @@ class App extends React.Component {
       {
         text: '发现',
         name: 'Find',
-        icon: <HomeOutlined />,
+        icon: <SearchOutlined />,
         path: '/find'
       },
       {
         text: '我的音乐',
         name: 'Mymusic',
-        icon: <ContactsOutlined />,
+        icon: <CustomerServiceOutlined />,
         path: '/mymusic'
       }, {
         text: '正在播放',
         name: 'Listenning',
-        icon: <TeamOutlined />,
+        icon: <PlayCircleOutlined />,
         path: '/listenning'
       },
       {
         text: '音乐圈',
         name: 'MusicCircle',
-        icon: <UserOutlined />,
+        icon: <UsergroupAddOutlined />,
         path: '/musicCircle'
       },
       {
         text: '个人中心',
         name: 'Mine',
-        icon: <UserOutlined />,
+        icon: <AppstoreOutlined />,
         path: '/mine'
       }
     ],
@@ -78,6 +80,7 @@ class App extends React.Component {
             <Route path="/fenlei" component={Fenlei} />
             <Route path="/login" component={Login} />
             <Route path="/reg" component={Reg}/>
+            <Route path="/details" component={Details} />
           </Switch>
         </Suspense>
         

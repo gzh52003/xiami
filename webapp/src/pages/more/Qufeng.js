@@ -1,6 +1,7 @@
 import React from 'react';
-import request from '../../utils/request';
-import { Menu, NavBar } from 'antd-mobile';
+import { Menu, NavBar, Icon } from 'antd-mobile';
+import { withRouter } from 'react-router-dom'
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 class Qufeng extends React.PureComponent {
     state = {
@@ -82,7 +83,7 @@ class Qufeng extends React.PureComponent {
                             label: '青少年流行',
                             value: '17',
                         }
-                    ],
+                    ]
                 },
                 {
                     value: '3',
@@ -128,28 +129,193 @@ class Qufeng extends React.PureComponent {
                             label: '噪音摇滚',
                             value: '10',
                         }
-                    ],
+                    ]
                 },
                 {
                     value: '4',
                     label: '民谣',
-
+                    children: [
+                        {
+                            label: '当代民谣',
+                            value: '1',
+                        },
+                        {
+                            label: '独立民谣',
+                            value: '2',
+                        },
+                        {
+                            label: '城市民谣',
+                            value: '3',
+                        },
+                        {
+                            label: '民谣流行',
+                            value: '4',
+                        },
+                        {
+                            label: '传统民谣',
+                            value: '5',
+                        },
+                        {
+                            label: '校园民谣',
+                            value: '6',
+                        },
+                        {
+                            label: '新民谣',
+                            value: '7',
+                        },
+                        {
+                            label: '前卫民谣',
+                            value: '8',
+                        },
+                    ]
                 },
                 {
                     value: '5',
-                    label: '电子'
+                    label: '电子',
+                    children: [
+                        {
+                            label: '电子舞曲',
+                            value: '1',
+                        },
+                        {
+                            label: '未来贝斯',
+                            value: '2',
+                        },
+                        {
+                            label: '浩室舞曲',
+                            value: '3',
+                        },
+                        {
+                            label: '合成器流行',
+                            value: '4',
+                        },
+                        {
+                            label: '独立电子乐',
+                            value: '5',
+                        },
+                        {
+                            label: '回响贝斯',
+                            value: '6',
+                        },
+                        {
+                            label: '陷阱舞曲',
+                            value: '7',
+                        },
+                        {
+                            label: '前卫浩室',
+                            value: '8',
+                        },
+                        {
+                            label: '未来浩室',
+                            value: '9',
+                        },
+                        {
+                            label: '电气浩室',
+                            value: '10',
+                        },
+                        {
+                            label: '蒙巴顿舞曲',
+                            value: '11',
+                        },
+                        {
+                            label: '科技舞曲',
+                            value: '12',
+                        }
+                    ]
                 },
                 {
                     value: '6',
-                    label: '节奏布鲁斯'
+                    label: '节奏布鲁斯',
+                    children: [
+                        {
+                            label: '当代节奏布鲁斯',
+                            value: '1',
+                        },
+                        {
+                            label: '未来放克贝斯',
+                            value: '2',
+                        },
+                        {
+                            label: '灵魂乐',
+                            value: '3',
+                        },
+                        {
+                            label: '流行灵魂乐',
+                            value: '4',
+                        },
+                        {
+                            label: '新灵魂乐',
+                            value: '5',
+                        },
+                        {
+                            label: '另类节奏布鲁斯',
+                            value: '6',
+                        },
+                        {
+                            label: '陷阱舞曲',
+                            value: '7',
+                        }
+                    ]
                 },
                 {
                     value: '7',
-                    label: '爵士'
+                    label: '爵士',
+                    children: [
+                        {
+                            label: '巴萨诺瓦',
+                            value: '1',
+                        },
+                        {
+                            label: '爵士流行',
+                            value: '2',
+                        },
+                        {
+                            label: '摇摆乐',
+                            value: '3',
+                        },
+                        {
+                            label: '柔顺爵士',
+                            value: '4',
+                        },
+                        {
+                            label: '融合爵士',
+                            value: '5',
+                        }
+                    ]
                 },
                 {
                     value: '8',
-                    label: '轻音乐'
+                    label: '轻音乐',
+                    children: [
+                        {
+                            label: '沙发音乐',
+                            value: '1',
+                        },
+                        {
+                            label: '异域',
+                            value: '2',
+                        },
+                        {
+                            label: '太空时代流行',
+                            value: '3',
+                        },
+                        {
+                            label: '合成器管弦乐流行流行',
+                            value: '4',
+                        },
+                        {
+                            label: '器乐流行',
+                            value: '5',
+                        },
+                        {
+                            label: '轻音乐流行',
+                            value: '6',
+                        },
+                        {
+                            label: '器乐独奏',
+                            value: '7',
+                        }
+                    ]
                 },
                 {
                     value: '9',
@@ -221,17 +387,16 @@ class Qufeng extends React.PureComponent {
                 }
             ]
     }
-    onChange(){
-        
+    onChange(value) {
+        this.props.history.push('/details?a=' + value[0] + 'b=' + value[1])
     }
     render() {
-        const { data, menu } = this.state
+        const { menu } = this.state
         return (
-            <div className='menu-active'>
+            <div className='menu-active'>               
                 <NavBar
-                    leftContent="Menu"
+                    leftContent={<ArrowLeftOutlined />}
                     mode="light"
-                    icon={<img src="https://gw.alipayobjects.com/zos/rmsportal/iXVHARNNlmdCGnwWxQPH.svg" className="am-icon am-icon-md" alt="" />}
                     className="top-nav-bar"
                 >
                     虾米音乐
@@ -240,11 +405,12 @@ class Qufeng extends React.PureComponent {
                     className="foo-menu"
                     data={menu}
                     height={document.documentElement.clientHeight * 1}
-                    onChange={()=>console.log(111)}
+                    onChange={this.onChange.bind(this)}
                 />
             </div>
         )
     }
 }
 
+Qufeng = withRouter(Qufeng);
 export default Qufeng
