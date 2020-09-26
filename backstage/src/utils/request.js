@@ -4,8 +4,9 @@
 
 import axios from 'axios';
 
+const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:2003' : '';
 const request = axios.create({
-    baseURL:'http://localhost:2003/',
+    baseURL:baseURL+'/api',
     withCredentials:true
 })
 

@@ -39,8 +39,9 @@ class MusicLibrary extends React.PureComponent {
         });
     }
     render() {
-        const { data1, data2, data3, data4, data5 } = this.state;
-        return (
+        // return(<div>123</div>)
+       const { data1, data2, data3, data4, data5 } = this.state;
+       return (
             <div style={{ height: "100%", padding: "0 10px" }}>
                 <div style={{ width: "90%", height: "100px", margin: "20px auto" }} >
                     <img
@@ -205,7 +206,7 @@ class MusicLibrary extends React.PureComponent {
                     </div>
                 </div>
                 
-                <div style={{ width: "90%", textAlign: "left", margin: "0 auto" }}>
+                <div style={{ width: "90%", textAlign: "left", margin: "0 auto" }}> 
                     <div onClick={this.goto.bind(this, '/qikan')}>
                         <h2 style={{ float: "left", width: "80%", fontWeight: "400",marginLeft:"4px" }}>专题特刊</h2>
                         <h4 style={{ float: "left", fontWeight: "300", marginTop: "28px" }} >更多</h4>
@@ -227,7 +228,8 @@ class MusicLibrary extends React.PureComponent {
                             </div>
                         )
                     }
-                </div>
+               </div>
+           
             </div>
         )
     }

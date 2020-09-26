@@ -11,7 +11,7 @@ import Home from "./pages/Home" //首页
 import Music from "./pages/Music" //歌曲管理
 import User from './pages/User' //用户管理
 import Order from "./pages/Order" //订单管理
-import Login from "./pages/Login" //登录
+import Login from "./pages/Login/index" //登录
 
 // @withRouter
 class App extends React.PureComponent {
@@ -60,7 +60,11 @@ class App extends React.PureComponent {
     // this.props.history.replace(path);
   }
   goto = (path) => {
+    if(path=='/Login'){
+       let user = localStorage.removeItem("currentUser")   
+    }
     this.props.history.push(path);
+
   }
   componentWillMount() {
     const { pathname } = this.props.location;
@@ -72,7 +76,8 @@ class App extends React.PureComponent {
 
   render() {
     const { menu, current } = this.state;
-    const user = localStorage.getItem("currentUser");
+    let user = localStorage.getItem("currentUser");
+    // console.log("user=",user)
     return (
       <div style={{height:"100%"}}>
         {user
