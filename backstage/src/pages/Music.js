@@ -19,7 +19,7 @@ const columns = [
 ];
 
 const data = [];
-for (let i = 0; i < 46; i++) {
+for (let i = 0; i < 20; i++) {
     data.push({
         key: i,
         name: `Edward King ${i}`,
@@ -38,7 +38,7 @@ const suffix = (
     />
 );
 
-class User extends React.PureComponent {
+class Music extends React.PureComponent {
     state = {
         selectedRowKeys: [], // Check here to configure the default column
     };
@@ -89,7 +89,7 @@ class User extends React.PureComponent {
         return (
             <div>
                 <Search
-                    placeholder="请输入用户名"
+                    placeholder="请输入歌曲名"
                     enterButton="Search"
                     size="large"
                     style={{ width: "600px", marginLeft:"20px"}}
@@ -102,4 +102,4 @@ class User extends React.PureComponent {
     }
 }
 
-export default User
+export default Music
