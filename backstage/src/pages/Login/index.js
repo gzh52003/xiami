@@ -1,4 +1,7 @@
 import React,{useState,useEffect,useMemo,useContext} from 'react';
+
+import { withRouter } from 'react-router-dom'
+
 import { Form, Input, Button, Checkbox,Alert } from 'antd';
 import {request} from '../../utils/index'
 import { HomeOutlined, FileAddOutlined, ReadOutlined, AudioOutlined } from '@ant-design/icons';
@@ -23,7 +26,7 @@ const tailLayout = {
 
 
 function Login(props) {
-     
+     console.log(props)
     const onFinish = async ({username,password,mdl}) => {
         // password = CryptoJS.SHA256(password);
         // password = CryptoJS.enc.Hex.stringify(password)
@@ -35,10 +38,11 @@ function Login(props) {
         });
         console.log('user=',data);
         if(data.code === 1){
-            // 跳转到我的页面
-            props.history.push('./Home')
+           
             // 把用户信息存入本地（数据持久化）
             localStorage.setItem('currentUser',JSON.stringify(data.data));
+             // 跳转到我的页面
+             props.history.push('./Home')
         }
       };
 
@@ -46,7 +50,7 @@ function Login(props) {
         console.log('Failed:', errorInfo);
     };
     return <div className="header">
-
+          
         <Form
             {...layout}
             name="basic"
@@ -56,6 +60,7 @@ function Login(props) {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
         >
+            <h1>虾米后台管理系统</h1>
             <Form.Item
                 label="用户名"
                 name="username"
@@ -86,7 +91,7 @@ function Login(props) {
                 <Checkbox>七天免登陆</Checkbox>
                        <Button type="danger" htmlType="submit"  style={{marginTop:"5px"}}>
                     登录
-        </Button>
+            </Button>
             </Form.Item>
 
         </Form>
@@ -94,6 +99,6 @@ function Login(props) {
 }
 
 
-
+Login = withRouter(Login)
 
 export default Login;

@@ -19,29 +19,30 @@ class MusicLibrary extends React.PureComponent {
     async componentDidMount() {
         const res1 = await request.get('/music?page=1&size=6');
         this.setState({
-            data1: res1
+            data1: res1.data
         });
-        console.log(res1);
+        console.log(res1.data);
         const res2 = await request.get('/music?page=2&size=6');
         this.setState({
-            data2: res2
+            data2: res2.data
         });
         const res3 = await request.get('/music?page=5&size=3');
         this.setState({
-            data3: res3
+            data3: res3.data
         });
         const res4 = await request.get('/music?page=6&size=3');
         this.setState({
-            data4: res4
+            data4: res4.data
         });
         const res5 = await request.get('/music?page=7&size=3');
         this.setState({
-            data5: res5
+            data5: res5.data
         });
     }
     render() {
-        const { data1, data2, data3, data4, data5 } = this.state;
-        return (
+        // return(<div>123</div>)
+       const { data1, data2, data3, data4, data5 } = this.state;
+       return (
             <div style={{ height: "100%", padding: "0 10px" }}>
                 <div style={{ width: "90%", height: "100px", margin: "20px auto" }} >
                     <img
@@ -206,7 +207,7 @@ class MusicLibrary extends React.PureComponent {
                     </div>
                 </div>
                 
-                <div style={{ width: "90%", textAlign: "left", margin: "0 auto" }}>
+                <div style={{ width: "90%", textAlign: "left", margin: "0 auto" }}> 
                     <div onClick={this.goto.bind(this, '/qikan')}>
                         <h2 style={{ float: "left", width: "80%", fontWeight: "400",marginLeft:"4px" }}>专题特刊</h2>
                         <h4 style={{ float: "left", fontWeight: "300", marginTop: "28px" }} >更多</h4>
@@ -228,7 +229,8 @@ class MusicLibrary extends React.PureComponent {
                             </div>
                         )
                     }
-                </div>
+               </div>
+           
             </div>
         )
     }
