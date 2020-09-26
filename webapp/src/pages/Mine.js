@@ -10,6 +10,7 @@ class Mine extends React.PureComponent {
     
     goto = (path)=>{
         this.props.history.push(path);
+        localStorage.removeItem("currentUser")
     }
     render() {
         return (
@@ -88,7 +89,7 @@ class Mine extends React.PureComponent {
                     <Item arrow="horizontal"><i className='iconfont' id="icon">&#xe68e;</i>意见反馈</Item>
                 </List>
                 </div>
-                <Button type="primary" style={{ marginTop: '32px',backgroundColor:'#333'}}>退出APP</Button>
+                <Button type="primary" style={{ marginTop: '32px',backgroundColor:'#333' }} onClick={this.goto.bind(this, '/login')} >退出APP</Button>
             </div>
         )
     }

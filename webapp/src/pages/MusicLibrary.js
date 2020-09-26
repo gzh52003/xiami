@@ -21,7 +21,6 @@ class MusicLibrary extends React.PureComponent {
         this.setState({
             data1: res1
         });
-        console.log(res1);
         const res2 = await request.get('/music?page=2&size=6');
         this.setState({
             data2: res2
