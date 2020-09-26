@@ -43,6 +43,8 @@ function Login(props) {
             localStorage.setItem('currentUser',JSON.stringify(data.data));
              // 跳转到我的页面
              props.history.push('./Home')
+        }else{
+            alert("请输入正确的账号或密码")
         }
       };
 
@@ -60,7 +62,7 @@ function Login(props) {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
         >
-            <h1>虾米后台管理系统</h1>
+            <h1 style={{paddingLeft:"10px"}}>虾米后台管理系统</h1>
             <Form.Item
                 label="用户名"
                 name="username"
