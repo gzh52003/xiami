@@ -40,9 +40,9 @@ class App extends React.Component {
       },
       {
         text: '音乐圈',
-        name: 'MusicCircle',
+        name: 'Music',
         icon: <UsergroupAddOutlined />,
-        path: '/musicCircle'
+        path: '/music'
       },
       {
         text: '个人中心',

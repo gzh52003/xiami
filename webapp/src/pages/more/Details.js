@@ -18,15 +18,15 @@ class Details extends React.PureComponent {
         const num = parseInt(Math.random() * 10 + 10);
         const res1 = await request.get(`/music?page=${num}&size=3`);
         this.setState({
-            data1: res1.data
+            data1: res1
         });
         const res2 = await request.get(`/music?page=${num}&size=6`);
         this.setState({
-            data2: res2.data
+            data2: res2
         });
         const res3 = await request.get(`/music?page=${num+1}&size=6`);
         this.setState({
-            data3: res3.data
+            data3: res3
         });
     }
     render() {

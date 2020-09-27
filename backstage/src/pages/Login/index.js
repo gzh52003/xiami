@@ -26,9 +26,9 @@ const tailLayout = {
 
 
 function Login(props) {
-     console.log(props)
+    //  console.log(props)
     const onFinish = async ({username,password,mdl}) => {
-        // password = CryptoJS.SHA256(password);
+        // password = CryptoJS.md5(password);
         // password = CryptoJS.enc.Hex.stringify(password)
         // console.log(password)
         const data = await request.get('/backlogin',{
@@ -51,6 +51,7 @@ function Login(props) {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+    
     return <div className="header">
           
         <Form
@@ -98,6 +99,82 @@ function Login(props) {
 
         </Form>
     </div >
+
+
+    
+    //注册
+    //   const onFinish = async ({username,password,mdl}) => {
+    //     // password = CryptoJS.SHA256(password);
+    //     // password = CryptoJS.enc.Hex.stringify(password)
+    //     // console.log(password)
+    //     const data = await request.post('/reg',{
+    //         username,
+    //         password,
+    //         // mdl
+    //     });
+    //     console.log('user=',data);
+    //     if(data.code === 1){
+           
+    //         // 把用户信息存入本地（数据持久化）
+    //         // localStorage.setItem('currentUser',JSON.stringify(data.data));
+    //          // 跳转到我的页面
+    //          props.history.push('./Home')
+    //     }else{
+    //         alert("请输入正确的账号或密码")
+    //     }
+    //   };
+
+    // const onFinishFailed = (errorInfo) => {
+    //     console.log('Failed:', errorInfo);
+    // };
+    // return <div className="header">
+          
+    //     <Form
+    //         {...layout}
+    //         name="basic"
+    //         initialValues={{
+    //             remember: true,
+    //         }}
+    //         onFinish={onFinish}
+    //         onFinishFailed={onFinishFailed}
+    //     >
+    //         <h1 style={{paddingLeft:"10px"}}>虾米后台管理系统</h1>
+    //         <Form.Item
+    //             label="用户名"
+    //             name="username"
+    //             rules={[
+    //                 {
+    //                     required: true,
+    //                     message: '请输入用户名',
+    //                 },
+    //             ]}
+    //         >
+    //             <Input />
+    //         </Form.Item>
+
+    //         <Form.Item
+    //             label="密码"
+    //             name="password"
+    //             rules={[
+    //                 {
+    //                     required: true,
+    //                     message: '请输入密码',
+    //                 },
+    //             ]}
+    //         >
+    //             <Input.Password />
+    //         </Form.Item>
+           
+    //         <Form.Item {...tailLayout} name="mdl" valuePropName="checked">
+    //             {/* <Checkbox>七天免登陆</Checkbox> */}
+    //                    <Button type="danger" htmlType="submit"  style={{marginTop:"5px"}}>
+    //                 注册
+    //         </Button>
+    //         </Form.Item>
+
+    //     </Form>
+    // </div >
+
 }
 
 
