@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs, WhiteSpace, Badge } from 'antd-mobile';
 import MusicLibrary from './MusicLibrary'
 import Home from './Home'
+import MV from './MV'
 
 const tabs = [
     { title: <Badge>乐库</Badge> },
@@ -23,7 +24,7 @@ class Find extends React.PureComponent {
                         <Home/>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', backgroundColor: '#fff' }}>
-                        Content of third tab
+                        <MV/>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', backgroundColor: '#fff' }}>
                         Content of fourth tab
