@@ -18,6 +18,7 @@ class MusicLibrary extends React.PureComponent {
 
     async componentDidMount() {
         const res1 = await request.get('/music?page=1&size=6');
+        console.log(res1)
         this.setState({
             data1: res1
         });

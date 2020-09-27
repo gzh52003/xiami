@@ -1,7 +1,8 @@
 import React from 'react';
-import {Form, Input,Button } from 'antd';
-import request from '@/utils/request';
+import {Form, Input,Button,Checkbox} from 'antd';
+import request from '../utils/request';
 import CryptoJS from 'crypto-js';
+
 import '../App.css'
 const layout = {
     labelCol: { span: 6 },
@@ -17,10 +18,12 @@ function Reg(props){
     const onFinish = async ({username,password}) => {
         password = CryptoJS.SHA256(password);
         password = CryptoJS.enc.Hex.stringify(password)
+        console.log(password)
         const data = await request.post('/reg',{
             username,
             password
         });
+        // console.log('user=',data.data);
         if(data.code === 1){
             // 跳转到我的页面
             props.history.push('/login')
@@ -76,5 +79,4 @@ function Reg(props){
         </div>
     )
 }
-
 export default Reg;
