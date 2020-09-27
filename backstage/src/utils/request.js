@@ -32,8 +32,9 @@ export async function post(url,data,config={}){
 }
 
 export async function put(url,data,config={}){
+    console.log(url,data,);
     const {data:result} = await request.put(url,data,config);
-
+    console.log(666);
     return result;
 }
 

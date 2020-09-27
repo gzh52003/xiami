@@ -15,6 +15,7 @@ const tailLayout = {
 
 function Login(props) {
     const onFinish = async ({ username, password, mdl }) => {
+        console.log(username, password, mdl);
         password = CryptoJS.SHA256(password);
         password = CryptoJS.enc.Hex.stringify(password)
         const data = await request.get('/login/user', {
@@ -35,8 +36,8 @@ function Login(props) {
     };
 
     const rules = {
-        username: [{ required: true, message: '用户名必填' }],
-        password: [{ required: true, message: '密码必填' }]
+        username:[{ required: true, message: '用户名必填' }],
+        password:[{ required: true, message: '密码必填' }]
     }
 
     return (
@@ -54,13 +55,13 @@ function Login(props) {
                     name="username"
                     rules={rules.username}
                     style={{ marginBottom: '20px' }}
-                ></Form.Item><Input  style={{ marginBottom: '20px' }}/>
+                ><Input  style={{ marginTop: '20px' }} /></Form.Item>
                 <Form.Item
                     label="密码"
                     name="password"
                     rules={rules.password}
                     style={{ marginBottom: '20px', size: '100' }}
-                ></Form.Item><Input.Password  style={{ marginBottom: '20px' }}/>
+                ><Input.Password  style={{ marginTop: '20px' }}/></Form.Item>
 
                 <Form.Item {...tailLayout} name="mdl" valuePropName="checked" style={{ margin: '30px 0' }}>
                     <Checkbox style={{ marginRight: '10px' }}>下次免登陆</Checkbox>
