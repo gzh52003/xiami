@@ -1,46 +1,55 @@
 import React from 'react';
-import { Input } from 'antd';
-import { AudioOutlined } from '@ant-design/icons';
+import { Input, Popconfirm, Button } from 'antd';
 import { Table } from 'antd';
+import request from '../utils/request';
 
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-    },
-];
-
-const data = [];
-for (let i = 0; i < 20; i++) {
-    data.push({
-        key: i,
-        name: `Edward King ${i}`,
-        age: 32,
-        address: `London, Park Lane no. ${i}`,
-    });
-}
 const { Search } = Input;
 
-const suffix = (
-    <AudioOutlined
-        style={{
-            fontSize: 16,
-            color: '#1890ff',
-        }}
-    />
-);
-
 class Music extends React.PureComponent {
+    async componentWillMount() {
+        const song = await request.get('/music');
+        const res = [];
+        song.forEach((item, idx) => {
+            res.push({
+                key: idx,
+                name:item.name,
+                singer:item.artists[0].name,
+                company:item.album.company
+            })
+        })
+        this.setState({ data: res })
+    }
     state = {
-        selectedRowKeys: [], // Check here to configure the default column
+        selectedRowKeys: [], 
+        data:[],
+        columns : [
+            {
+                title: '歌曲名',
+                dataIndex: 'name',
+            },
+            {
+                title: '演唱',
+                dataIndex: 'singer',
+            },
+            {
+                title: '出品公司',
+                dataIndex: 'company',
+            },
+            {
+                title: '操作',
+                dataIndex: 'operation',
+                render: (record) =>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+                        <Button type={"primary"}>删除</Button>
+                        <Button type={"danger"}>修改</Button>
+                    </Popconfirm>
+            }
+        ]
+    };
+
+    handleDelete = key => {
+        const dataSource = [...this.state.dataSource];
+        this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
     };
 
     onSelectChange = selectedRowKeys => {
@@ -48,42 +57,10 @@ class Music extends React.PureComponent {
         this.setState({ selectedRowKeys });
     };
     render() {
-        const { selectedRowKeys } = this.state;
+        const { selectedRowKeys, data, columns } = this.state;
         const rowSelection = {
             selectedRowKeys,
             onChange: this.onSelectChange,
-            selections: [
-                Table.SELECTION_ALL,
-                Table.SELECTION_INVERT,
-                {
-                    key: 'odd',
-                    text: 'Select Odd Row',
-                    onSelect: changableRowKeys => {
-                        let newSelectedRowKeys = [];
-                        newSelectedRowKeys = changableRowKeys.filter((key, index) => {
-                            if (index % 2 !== 0) {
-                                return false;
-                            }
-                            return true;
-                        });
-                        this.setState({ selectedRowKeys: newSelectedRowKeys });
-                    },
-                },
-                {
-                    key: 'even',
-                    text: 'Select Even Row',
-                    onSelect: changableRowKeys => {
-                        let newSelectedRowKeys = [];
-                        newSelectedRowKeys = changableRowKeys.filter((key, index) => {
-                            if (index % 2 !== 0) {
-                                return true;
-                            }
-                            return false;
-                        });
-                        this.setState({ selectedRowKeys: newSelectedRowKeys });
-                    },
-                },
-            ],
         };
 
         return (

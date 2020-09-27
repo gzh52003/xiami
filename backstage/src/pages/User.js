@@ -1,89 +1,68 @@
 import React from 'react';
-import { Input } from 'antd';
-import { AudioOutlined } from '@ant-design/icons';
+import { Button, Input, Popconfirm } from 'antd';
 import { Table } from 'antd';
+import request from '../utils/request';
 
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-    },
-];
-
-const data = [];
-for (let i = 0; i < 46; i++) {
-    data.push({
-        key: i,
-        name: `Edward King ${i}`,
-        age: 32,
-        address: `London, Park Lane no. ${i}`,
-    });
-}
 const { Search } = Input;
-
-const suffix = (
-    <AudioOutlined
-        style={{
-            fontSize: 16,
-            color: '#1890ff',
-        }}
-    />
-);
 
 class User extends React.PureComponent {
     state = {
-        selectedRowKeys: [], // Check here to configure the default column
+        selectedRowKeys: [],
+        data: [],
+        columns: [
+            {
+                title: '用户名',
+                dataIndex: 'name',
+            },
+            {
+                title: '年龄',
+                dataIndex: 'age',
+            },
+            {
+                title: '性别',
+                dataIndex: 'gender',
+            },
+            {
+                title: '操作',
+                dataIndex: 'operation',
+                render: (record) =>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+                        <Button type={"primary"}>删除</Button>
+                        <Button type={"danger"}>修改</Button>
+                    </Popconfirm>
+            }
+        ]
+    };
+
+    handleDelete = key => {
+        const dataSource = [...this.state.dataSource];
+        this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
     };
 
     onSelectChange = selectedRowKeys => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
     };
+
+    async componentWillMount() {
+        const { data } = await request.get('/user');
+        const res = [];
+        data.forEach((item, idx) => {
+            res.push({
+                key: idx,
+                name: item.username,
+                age: item.age,
+                gender: item.gender,
+
+            })
+        })
+        this.setState({ data: res })
+    }
     render() {
-        const { selectedRowKeys } = this.state;
+        const { selectedRowKeys, data, columns } = this.state;
         const rowSelection = {
             selectedRowKeys,
             onChange: this.onSelectChange,
-            selections: [
-                Table.SELECTION_ALL,
-                Table.SELECTION_INVERT,
-                {
-                    key: 'odd',
-                    text: 'Select Odd Row',
-                    onSelect: changableRowKeys => {
-                        let newSelectedRowKeys = [];
-                        newSelectedRowKeys = changableRowKeys.filter((key, index) => {
-                            if (index % 2 !== 0) {
-                                return false;
-                            }
-                            return true;
-                        });
-                        this.setState({ selectedRowKeys: newSelectedRowKeys });
-                    },
-                },
-                {
-                    key: 'even',
-                    text: 'Select Even Row',
-                    onSelect: changableRowKeys => {
-                        let newSelectedRowKeys = [];
-                        newSelectedRowKeys = changableRowKeys.filter((key, index) => {
-                            if (index % 2 !== 0) {
-                                return true;
-                            }
-                            return false;
-                        });
-                        this.setState({ selectedRowKeys: newSelectedRowKeys });
-                    },
-                },
-            ],
         };
 
         return (
@@ -92,11 +71,11 @@ class User extends React.PureComponent {
                     placeholder="请输入用户名"
                     enterButton="Search"
                     size="large"
-                    style={{ width: "600px", marginLeft:"20px"}}
+                    style={{ width: "600px", marginLeft: "20px" }}
                     onSearch={value => console.log(value)}
                 />
-                <Table rowSelection={rowSelection} columns={columns} dataSource={data} 
-                style={{margin:"20px"}}/>
+                <Table rowSelection={rowSelection} columns={columns} dataSource={data}
+                    style={{ margin: "20px" }} />
             </div>
         )
     }
