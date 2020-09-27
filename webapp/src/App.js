@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 
 import Mine from './pages/Mine'
 import MusicCircle from './pages/MusicCircle'
+import Music from './pages/Music'
 import Mymusic from './pages/Mymusic'
 import Listenning from './pages/Listenning'
 import Find from './pages/Find'
@@ -79,7 +80,7 @@ class App extends React.Component {
             <Route path="/find" component={Find} />
             <Route path="/listenning" component={Listenning} />
             <Route path="/mine" component={Mine} />
-            <Route path="/musicCircle" component={MusicCircle} />
+            <Route path="/music" component={Music} />
             <Route path="/mymusic" component={Mymusic} />
             <Route path="/qufeng" component={Qufeng} />
             <Route path="/xinge" component={Xinge} />

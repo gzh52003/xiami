@@ -15,14 +15,13 @@ const tailLayout = {
   
 
 function Reg(props){
-    const onFinish = async ({username,password,mdl}) => {
+    const onFinish = async ({username,password}) => {
         password = CryptoJS.SHA256(password);
         password = CryptoJS.enc.Hex.stringify(password)
         console.log(password)
         const data = await request.post('/reg',{
             username,
-            password,
-            mdl
+            password
         });
         // console.log('user=',data.data);
         if(data.code === 1){
