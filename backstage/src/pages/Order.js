@@ -1,12 +1,81 @@
 import React from 'react';
-class Order extends React.PureComponent{
+import { Button, Input, Popconfirm } from 'antd';
+import { Table } from 'antd';
+import request from '../utils/request';
 
-    render(){
-        return(
+const { Search } = Input;
+
+class Order extends React.PureComponent {
+    state = {
+        selectedRowKeys: [],
+        data: [],
+        columns: [
+            {
+                title: '用户昵称',
+                dataIndex: 'name',
+            },
+            {
+                title: '联系方式',
+                dataIndex: 'number',
+            },
+            {
+                title: '下单时间',
+                dataIndex: 'start',
+            },
+            {
+                title: '到期时间',
+                dataIndex: 'end',
+                render: (record) =>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+                        <Button type={"primary"}>删除</Button>
+                        <Button type={"danger"}>修改</Button>
+                    </Popconfirm>
+            }
+        ]
+    };
+
+    handleDelete = key => {
+        const dataSource = [...this.state.dataSource];
+        this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
+    };
+
+    onSelectChange = selectedRowKeys => {
+        console.log('selectedRowKeys changed: ', selectedRowKeys);
+        this.setState({ selectedRowKeys });
+    };
+
+    async componentWillMount() {
+        const { data } = await request.get('/order');
+        const res = [];
+        data.forEach((item, idx) => {
+            res.push({
+                key: idx,
+                name: item.username,
+                age: item.age,
+                gender: item.gender,
+
+            })
+        })
+        this.setState({ data: res })
+    }
+    render() {
+        const { selectedRowKeys, data, columns } = this.state;
+        const rowSelection = {
+            selectedRowKeys,
+            onChange: this.onSelectChange,
+        };
+
+        return (
             <div>
-
-                订单管理
-                
+                <Search
+                    placeholder="请输入联系方式"
+                    enterButton="Search"
+                    size="large"
+                    style={{ width: "600px", marginLeft: "20px" }}
+                    onSearch={value => console.log(value)}
+                />
+                <Table rowSelection={rowSelection} columns={columns} dataSource={data}
+                    style={{ margin: "20px" }} />
             </div>
         )
     }

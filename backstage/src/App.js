@@ -37,7 +37,7 @@ class App extends React.PureComponent {
       path: '/Music'
     },
     {
-      text: '订单管理',
+      text: ' VIP用户',
       name: 'Order',
 
       path: '/Order'

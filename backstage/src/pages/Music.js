@@ -7,7 +7,9 @@ const { Search } = Input;
 
 class Music extends React.PureComponent {
     async componentWillMount() {
-        const song = await request.get('/music');
+        let song = await request.get('/music');
+        console.log('song=',song)
+        song = song.data
         const res = [];
         song.forEach((item, idx) => {
             res.push({
