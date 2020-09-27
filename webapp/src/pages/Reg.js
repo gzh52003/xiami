@@ -1,8 +1,8 @@
 import React from 'react';
 import {Form, Input,Button,Checkbox} from 'antd';
-// import request from '@/utils/request';
-// import CryptoJS from 'crypto-js';
-// console.log('crypto=',CryptoJS);
+import request from '../utils/request';
+import CryptoJS from 'crypto-js';
+
 import '../App.css'
 const layout = {
     labelCol: { span: 6 },
@@ -19,15 +19,15 @@ function Reg(props){
         password = CryptoJS.SHA256(password);
         password = CryptoJS.enc.Hex.stringify(password)
         console.log(password)
-        const data = await request.get('/user/login',{
+        const data = await request.post('/reg',{
             username,
             password,
             mdl
         });
-        console.log('user=',data.data);
-        if(data.status === 200){
+        // console.log('user=',data.data);
+        if(data.code === 1){
             // 跳转到我的页面
-            props.history.push('/mine')
+            props.history.push('/login')
             // 把用户信息存入本地（数据持久化）
             localStorage.setItem('currentUser',JSON.stringify(data.data));
         }
@@ -80,5 +80,4 @@ function Reg(props){
         </div>
     )
 }
-
 export default Reg;

@@ -17,17 +17,17 @@ class Find extends React.PureComponent{
     async componentDidMount() {
         const res1 = await request.get('/music?page=3&size=6');
         this.setState({
-            data1: res1.data
+            data1: res1
         })
         
         const res2 = await request.get('/music?page=9&size=6');
         this.setState({
-            data2: res2.data
+            data2: res2
         });
      
         const res3 = await request.get('/music?page=10&size=3');
         this.setState({
-            data3: res3.data
+            data3: res3
         });
         console.log("data3=",res3.data);
     }

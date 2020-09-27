@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 
 import Mine from './pages/Mine'
-import MusicCircle from './pages/Musiccircle'
+import MusicCircle from './pages/MusicCircle'
 import Mymusic from './pages/Mymusic'
 import Listenning from './pages/Listenning'
 import Find from './pages/Find'

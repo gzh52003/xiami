@@ -22,13 +22,13 @@ class Mine extends React.PureComponent {
                 <button onClick={this.goto.bind(this,'/reg')}>注册</button>
                 <div style={{marginTop:'25px'}}>
                 <List>
-                    <Item arrow="horizontal" extra={'尊享权益'}><i className='iconfont' id="icon">&#xe69c;</i>会员中心</Item>
+                    <Item arrow="horizontal" extra={'尊享权益'}onClick={this.goto.bind(this,'/login')}><i className='iconfont' id="icon">&#xe69c;</i>会员中心</Item>
                 </List>
                 <List>
-                    <Item arrow="horizontal" extra={'签到必得会员'}><i className='iconfont' id="icon">&#xe614;</i>每日签到</Item>
+                    <Item arrow="horizontal" extra={'签到必得会员'}onClick={this.goto.bind(this,'/login')}><i className='iconfont' id="icon">&#xe614;</i>每日签到</Item>
                 </List>
                 <List>
-                    <Item arrow="horizontal"><i className='iconfont' id="icon">&#xe62d;</i>养虾米</Item>
+                    <Item arrow="horizontal" onClick={this.goto.bind(this,'/login')}><i className='iconfont' id="icon">&#xe62d;</i>养虾米</Item>
                 </List>
                 <List>
                     <Item arrow="horizontal"><i className='iconfont' id="icon">&#xeab0;</i>MQA高品质专区</Item>
