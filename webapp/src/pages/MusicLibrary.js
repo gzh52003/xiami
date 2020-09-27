@@ -20,23 +20,23 @@ class MusicLibrary extends React.PureComponent {
         const res1 = await request.get('/music?page=1&size=6');
         console.log(res1)
         this.setState({
-            data1: res1
+            data1: res1.data
         });
         const res2 = await request.get('/music?page=2&size=6');
         this.setState({
-            data2: res2
+            data2: res2.data
         });
         const res3 = await request.get('/music?page=5&size=3');
         this.setState({
-            data3: res3
+            data3: res3.data
         });
         const res4 = await request.get('/music?page=6&size=3');
         this.setState({
-            data4: res4
+            data4: res4.data
         });
         const res5 = await request.get('/music?page=7&size=3');
         this.setState({
-            data5: res5
+            data5: res5.data
         });
     }
     render() {

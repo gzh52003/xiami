@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 
 import Mine from './pages/Mine'
-import MusicCircle from './pages/MusicCircle'
 import Music from './pages/Music'
 import Mymusic from './pages/Mymusic'
 import Listenning from './pages/Listenning'
@@ -41,9 +40,9 @@ class App extends React.Component {
       },
       {
         text: '音乐圈',
-        name: 'MusicCircle',
+        name: 'Music',
         icon: <UsergroupAddOutlined />,
-        path: '/musicCircle'
+        path: '/music'
       },
       {
         text: '个人中心',
